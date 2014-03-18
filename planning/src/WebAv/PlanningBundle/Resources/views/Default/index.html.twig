@@ -2,9 +2,11 @@
 {% block title %}
   Accueil - {{ parent() }}
 {% endblock %}
+
 {% block path %}
 	{{ parent() }}/<a href="#">Accueil</a>/
 {% endblock %}
+
 {% block body_content%}
 {% set monmois = mounth[mois] %}
 
@@ -42,6 +44,9 @@
 						<div class="span1 mabox">
 					{% endif %}
 					<center>{{d}}
+					{#
+						Ici Trouver le nombre de Reservation faite le Jour. 
+					#}
 					<p>nb : 1</p></center>
 					{% if cpt == 0 %}
 						{% set cpt = cpt+datesJ[year][mois+1][d] %}

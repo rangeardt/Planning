@@ -1,6 +1,6 @@
 <?php
 
-namespace IUT\PlaningBundle\Entity;
+namespace WebAv\PlanningBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 

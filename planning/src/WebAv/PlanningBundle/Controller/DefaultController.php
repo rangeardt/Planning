@@ -3,11 +3,20 @@
 namespace WebAv\PlanningBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use WebAv\PlanningBundle\Entity\Reservation;
+
+
 
 class DefaultController extends Controller
 {
     public function indexAction($year)
     {
+
+          $liste = $this->getDoctrine()
+                      ->getManager()
+                      ->getRepository('WebAvPlanningBundle:Reservation')
+                      ->findAll();
+
 
     	 $ServiceDate = $this->container->get('webav_planning.date');
 
