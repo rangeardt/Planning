@@ -1,3 +1,7 @@
+web_av_user:
+    resource: "@WebAvUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 web_av_planning:
     resource: "@WebAvPlanningBundle/Resources/config/routing.yml"
     prefix:   /
