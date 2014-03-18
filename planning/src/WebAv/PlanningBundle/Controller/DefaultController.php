@@ -24,4 +24,9 @@ class DefaultController extends Controller
             'days'=>$ServiceDate->days,
         	));
     }
+
+    public function accueilAction(){
+        return $this->render('WebAvPlanningBundle:Default:accueil.html.twig',array());
+    }
+
 }
