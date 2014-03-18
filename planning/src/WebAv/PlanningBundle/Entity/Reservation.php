@@ -24,7 +24,7 @@ class Reservation
 
 
     /**
-     * @ORM\OneToOne(targetEntity="WebAv\PlanningBundle\Entity\User", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="WebAv\UserBundle\Entity\User", cascade={"persist"})
      */
     private $usr;
 
