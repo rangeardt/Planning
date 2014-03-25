@@ -32,17 +32,20 @@ class ReservationRepository extends EntityRepository
 
 
 	  $qb->andWhere('d.date BETWEEN :debut AND :fin')
-      	 ->setParameter('debut', $debut)  // Date entre le 1er janvier de cette année
-      	 ->setParameter('fin', $fin); // Et le 31 décembre de cette année
+      	 ->setParameter('debut', $debut)  // Date entre le 1er janvier de cette annM-CM-)e
+      	 ->setParameter('fin', $fin); // Et le 31 dM-CM-)cembre de cette annM-CM-)e
 
-	  // On peut ajouter ce qu'on veut après
+	  // On peut ajouter ce qu'on veut aprM-CM-(s
 	  $qb->orderBy('d.date', 'ASC');
 	  $tab=$qb->getQuery()->getResult();
 	  $mesreserv=array();
-	  foreach ($tab as $key => $r) {
-		$r['date']->getDate();	  	
-	  }
-	 return $tab;
+	 	foreach ($tab as $key => $value) {
+	 	$m=$value->getDate();
+		$mesreserv[$m[0]->getDate()->format('Y-m-d')][]=$value;
+	 	}
+
+
+	 return $mesreserv;
 
 	}
 }
