@@ -22,13 +22,13 @@ class ActDate
     private $id;
 
     /**
-   * @ORM\ManyToOne(targetEntity="WebAv\PlanningBundle\Entity\Activite")
+   * @ORM\ManyToOne(targetEntity="WebAv\PlanningBundle\Entity\Activite", cascade={"persist"})
    * @ORM\JoinColumn(nullable=false)
    */
   private $activite;
 
      /**
-   * @ORM\ManyToOne(targetEntity="WebAv\PlanningBundle\Entity\Date")
+   * @ORM\ManyToOne(targetEntity="WebAv\PlanningBundle\Entity\Date", cascade={"persist"})
    * @ORM\JoinColumn(nullable=false)
    */
   private $date;

@@ -5,3 +5,7 @@ webav_planningyear:
 webav_planning:
     pattern:  /
     defaults: { _controller: WebAvPlanningBundle:Default:accueil }
+
+webav_planningadd:
+    pattern:  /Ajouter
+    defaults: { _controller: WebAvPlanningBundle:Default:addact }

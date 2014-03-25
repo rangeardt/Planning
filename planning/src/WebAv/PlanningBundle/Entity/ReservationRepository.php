@@ -20,8 +20,12 @@ class ReservationRepository extends EntityRepository
 
 	
 	  $debut=new Datetime($year.'-'.($month+1).'-01');
-	  $fin=new Datetime($year.'-'.($month+2).'-01');
-
+	  if ($month+2>12){
+	  	$fin=new Datetime(($year+1).'-01-01');
+	  }
+	  else{
+	  	$fin=new Datetime($year.'-'.($month+2).'-01');
+	  }
 	  $qb = $this->createQueryBuilder('Reserv')
 	  		->leftJoin('Reserv.actdate', 'ad')
 	  		->leftJoin('ad.date','d')

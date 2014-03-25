@@ -24,7 +24,7 @@ class Reservation
 
 
 /**
-   * @ORM\ManyToOne(targetEntity="WebAv\UserBundle\Entity\User")
+   * @ORM\ManyToOne(targetEntity="WebAv\UserBundle\Entity\User", cascade={"persist"})
    * @ORM\JoinColumn(nullable=false)
    */
   private $usr;

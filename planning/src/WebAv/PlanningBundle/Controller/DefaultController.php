@@ -4,8 +4,8 @@ namespace WebAv\PlanningBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use WebAv\PlanningBundle\Entity\Reservation;
-
-
+use WebAv\PlanningBundle\Form\ReservationType;
+use WebAv\UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -40,6 +40,7 @@ public function indexAction($year)
 
     public function accueilAction(){
         $userManager = $this->container->get('fos_user.user_manager');
+
         $user = $userManager->findUserByUsername($this->container->get('security.context')
                       ->getToken()
                       ->getUser());
@@ -50,4 +51,32 @@ public function indexAction($year)
         return $this->render('WebAvPlanningBundle:Default:accueil.html.twig',array('tab'=>$tab));
     }
 
+    public function addactAction()
+    {
+      $Reservation = new Reservation;
+      $form = $this->createForm(new ReservationType, $Reservation);
+      $user= new User();
+        $userManager = $this->container->get('fos_user.user_manager');
+
+        $user = $userManager->findUserByUsername($this->container->get('security.context')
+                      ->getToken()
+                      ->getUser());
+      $request = $this->get('request');
+      if ($request->getMethod() == 'POST') {
+        $form->bind($request);
+
+        if ($form->isValid()) {
+          $em = $this->getDoctrine()->getManager();
+          $Reservation->setUsr($user);
+          $em->persist($Reservation);
+          $em->flush();
+
+          return $this->redirect($this->generateUrl('webav_planning'));
+        }
+      }
+
+      return $this->render('WebAvPlanningBundle:Default:formulaire.html.twig', array(
+        'form' => $form->createView(),
+      ));
+    }
 }
