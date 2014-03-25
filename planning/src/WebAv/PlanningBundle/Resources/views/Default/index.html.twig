@@ -11,7 +11,7 @@
 {% block body_content%}
 	{% set monmois = mounth[mois] %}
 	{{ year }} - {{ monmois }}
-
+{{dump()}}
 	<ul class="nav nav-tabs">
 		{% set id = 0 %}
 		{% for m in mounth %}
@@ -79,12 +79,8 @@
     {% for key in reserv|keys %}
 					{% if key|date('Y-m-d')==date1 %}
 						{% for i in reserv[key] %}
-							{% for heure in i.date %}
-								{{heure.date|date(('H:i:s'))}}
-							{% endfor %}
-							{% for value in i.activite %}
-								{{value.nomactivite}}
-							{% endfor %}
+							{{i.actdate.date.date|date('h:i:s')}}
+							{{i.actdate.activite.nomactivite }}
 						{% endfor %}
 					{% endif%}
 			{% endfor %}
