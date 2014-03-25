@@ -61,4 +61,27 @@ class Activite
     {
         return $this->nomactivite;
     }
+
+    /**
+     * Set reservation
+     *
+     * @param \WebAv\PlanningBundle\Entity\Reservation $reservation
+     * @return Activite
+     */
+    public function setReservation(\WebAv\PlanningBundle\Entity\Reservation $reservation)
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Get reservation
+     *
+     * @return \WebAv\PlanningBundle\Entity\Reservation 
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
+    }
 }

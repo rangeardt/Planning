@@ -39,10 +39,13 @@ class ReservationRepository extends EntityRepository
 	  $qb->orderBy('d.date', 'ASC');
 	  $tab=$qb->getQuery()->getResult();
 	  $mesreserv=array();
-	  foreach ($tab as $key => $r) {
-		$r['date']->getDate()	  	
-	  }
-	 return $tab;
+	 	foreach ($tab as $key => $value) {
+	 	$m=$value->getDate();
+		$mesreserv[$m[0]->getDate()->format('Y-m-d')][]=$value;
+	 	}
+
+
+	 return $mesreserv;
 
 	}
 }

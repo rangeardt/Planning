@@ -23,24 +23,19 @@ class Reservation
 
 
 
-    /**
-     * @ORM\OneToOne(targetEntity="WebAv\UserBundle\Entity\User", cascade={"persist"})
-     */
-    private $usr;
+/**
+   * @ORM\ManyToMany(targetEntity="WebAv\UserBundle\Entity\User", cascade={"persist"})
+   */
+  private $usr;
 
-   /**
-     * @ORM\OneToOne(targetEntity="WebAv\PlanningBundle\Entity\Date", cascade={"persist"})
-     */
-    private $date;
-
-   /**
-     * @ORM\OneToOne(targetEntity="WebAv\PlanningBundle\Entity\Activite", cascade={"persist"})
-     */
-    private $activite;
-
-
-
-
+/**
+   * @ORM\ManyToMany(targetEntity="WebAv\PlanningBundle\Entity\Date", cascade={"persist"})
+   */
+  private $date;
+/**
+   * @ORM\ManyToMany(targetEntity="WebAv\PlanningBundle\Entity\Activite", cascade={"persist"})
+   */
+  private $activite;
 
     /**
      * Get id
@@ -119,5 +114,82 @@ class Reservation
     public function getActivite()
     {
         return $this->activite;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->date = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->activite = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add date
+     *
+     * @param \WebAv\PlanningBundle\Entity\Date $date
+     * @return Reservation
+     */
+    public function addDate(\WebAv\PlanningBundle\Entity\Date $date)
+    {
+        $this->date[] = $date;
+
+        return $this;
+    }
+
+    /**
+     * Remove date
+     *
+     * @param \WebAv\PlanningBundle\Entity\Date $date
+     */
+    public function removeDate(\WebAv\PlanningBundle\Entity\Date $date)
+    {
+        $this->date->removeElement($date);
+    }
+
+    /**
+     * Add activite
+     *
+     * @param \WebAv\PlanningBundle\Entity\Activite $activite
+     * @return Reservation
+     */
+    public function addActivite(\WebAv\PlanningBundle\Entity\Activite $activite)
+    {
+        $this->activite[] = $activite;
+
+        return $this;
+    }
+
+    /**
+     * Remove activite
+     *
+     * @param \WebAv\PlanningBundle\Entity\Activite $activite
+     */
+    public function removeActivite(\WebAv\PlanningBundle\Entity\Activite $activite)
+    {
+        $this->activite->removeElement($activite);
+    }
+
+    /**
+     * Add usr
+     *
+     * @param \WebAv\UserBundle\Entity\User $usr
+     * @return Reservation
+     */
+    public function addUsr(\WebAv\UserBundle\Entity\User $usr)
+    {
+        $this->usr[] = $usr;
+
+        return $this;
+    }
+
+    /**
+     * Remove usr
+     *
+     * @param \WebAv\UserBundle\Entity\User $usr
+     */
+    public function removeUsr(\WebAv\UserBundle\Entity\User $usr)
+    {
+        $this->usr->removeElement($usr);
     }
 }

@@ -8,46 +8,63 @@
 {% endblock %}
 
 {% block body_content%}
-{% set monmois = mounth[mois] %}
-
-{{ year }} - {{ monmois }}
- <ul class="nav nav-tabs">
-{% set id = 0 %}
-{% for m in mounth %}
-	{% for key in mounth|keys %}
-    	{% if mounth[key] == m %}
-     		{% set id = key %}
-    	{% endif %}
-	{% endfor %}
- 
-    <li	{% if monmois == m %} class="active" {% endif %}><a href="{{ path('webav_planningyear',{'year':year,'mois':id}) }}">{{m}}</a></li>
-{%  endfor %}
-</ul>
-
-	 <div class="row-fluid">
-	 {% set cpt = 0 %}
-	 {% for day in days %}
-	 	<div class="span1"><center>{{day}}</center></div>
-	 {% endfor %}
-</div>
-			
-			<div class="row-fluid">
-			{% for d in dates[year][mois+1] %}
-				{% if cpt is divisibleby(7) %}
-					
-					</div><div class="row-fluid">
+	{% set monmois = mounth[mois] %}
+	{{ year }} - {{ monmois }}
+	<ul class="nav nav-tabs">
+		{% set id = 0 %}
+		{% for m in mounth %}
+			{% for key in mounth|keys %}
+    			{% if mounth[key] == m %}
+     				{% set id = key %}
+    			{% endif %}
+			{% endfor %}
+ 		    <li	{% if monmois == m %} class="active" {% endif %}><a href="{{ path('webav_planningyear',{'year':year,'mois':id}) }}">{{m}}</a></li>
+		{%  endfor %}
+	</ul>
+	<div class="row-fluid">
+		{% set cpt = 0 %}
+	 	{% for day in days %}
+	 		<div class="span1"><center>{{day}}</center></div>
+	 	{% endfor %}
+	</div>
+	<div class="row-fluid">
+		{% for d in dates[year][mois+1] %}
+			{% if cpt is divisibleby(7) %}		
+				</div><div class="row-fluid">
+			{% endif %}
+			{% if cpt ==0 and datesJ[year][mois+1][d]!=1 %}
+				<div class="offset{{datesJ[year][mois+1][d]-1}} span1">
+			{% else %}
+				<div class="span1 mabox">
+			{% endif %}
+			<center>{{d}}
+			{%set mois = mois+1%}
+			{% if mois < 10 %}
+				{% if d <10 %}
+					{% set date1=year~"-0"~mois~"-0"~d %}
+				{% else %}
+					{% set date1=year~"-0"~mois~"-"~d %}
 				{% endif %}
-				{% if cpt ==0 and datesJ[year][mois+1][d]!=1 %}
-					
-						<div class="offset{{datesJ[year][mois+1][d]-1}} span1">
-					{% else %}
-						<div class="span1 mabox">
-					{% endif %}
-					<center>{{d}}
-					{#
-						Ici Trouver le nombre de Reservation faite le Jour. 
-					#}
-					<p>nb : 1</p></center>
+			{% else %}
+				{% if d <10 %}
+
+					{% set date1=year~"-"~mois~"-0"~d %}
+
+				{% else %}
+					{% set date1=year~"-"~mois~"-"~d %}
+
+				{% endif %}
+			{% endif %}
+
+			{%set mois = mois-1%}
+			{% set nb = 0 %}
+			{% for key in reserv|keys %}
+					{% if key|date('Y-m-d')==date1 %}
+						{% set nb = reserv[date1]|length() %}
+					{% endif%}
+			{% endfor %}
+				
+					<p>nb :{{nb}}</p></center>
 					{% if cpt == 0 %}
 						{% set cpt = cpt+datesJ[year][mois+1][d] %}
 					{% else %}
