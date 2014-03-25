@@ -1,6 +1,7 @@
 {% extends "WebAvPlanningBundle::layout.html.twig" %}
 {% block title %}
   Accueil - {{ parent() }}
+
 {% endblock %}
 
 {% block path %}
@@ -10,6 +11,7 @@
 {% block body_content%}
 	{% set monmois = mounth[mois] %}
 	{{ year }} - {{ monmois }}
+{{dump()}}
 	<ul class="nav nav-tabs">
 		{% set id = 0 %}
 		{% for m in mounth %}
@@ -65,6 +67,32 @@
 			{% endfor %}
 				
 					<p>nb :{{nb}}</p></center>
+   	 <!-- Button to trigger modal -->
+    <a href="#myModal{{date1}}" role="button" class="btn" data-toggle="modal">Afficher</a>
+
+    <div id="myModal{{date1}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">{{date1}}</h3>
+    </div>
+    <div class="modal-body">
+    {% for key in reserv|keys %}
+					{% if key|date('Y-m-d')==date1 %}
+						{% for i in reserv[key] %}
+							{{i.actdate.date.date|date('h:i:s')}}
+							{{i.actdate.activite.nomactivite }}
+						{% endfor %}
+					{% endif%}
+			{% endfor %}
+
+    </div>
+    <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
+
+    </div>
+    </div>
+
+
 					{% if cpt == 0 %}
 						{% set cpt = cpt+datesJ[year][mois+1][d] %}
 					{% else %}

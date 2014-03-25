@@ -23,9 +23,10 @@ class ReservationRepository extends EntityRepository
 	  $fin=new Datetime($year.'-'.($month+2).'-01');
 
 	  $qb = $this->createQueryBuilder('Reserv')
-	  		->leftJoin('Reserv.usr', 'u')
-	  		->leftJoin('Reserv.date', 'd')
-	  		->leftJoin('Reserv.activite', 'a');
+	  		->leftJoin('Reserv.actdate', 'ad')
+	  		->leftJoin('ad.date','d')
+	  		->leftJoin('ad.activite','a')
+	  		->leftJoin('Reserv.usr', 'u');
 
 	  $qb->where('u.id = :utilisateur')
 	  	 ->setParameter('utilisateur', $user);
@@ -40,8 +41,8 @@ class ReservationRepository extends EntityRepository
 	  $tab=$qb->getQuery()->getResult();
 	  $mesreserv=array();
 	 	foreach ($tab as $key => $value) {
-	 	$m=$value->getDate();
-		$mesreserv[$m[0]->getDate()->format('Y-m-d')][]=$value;
+	 	$m=$value->getActDate()->getDate();
+		$mesreserv[$m->getDate()->format('Y-m-d')][]=$value;
 	 	}
 
 
