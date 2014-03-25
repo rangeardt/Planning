@@ -40,7 +40,7 @@ class ReservationRepository extends EntityRepository
 	  $tab=$qb->getQuery()->getResult();
 	  $mesreserv=array();
 	  foreach ($tab as $key => $r) {
-		$r['date']->getDate()	  	
+		$r['date']->getDate();	  	
 	  }
 	 return $tab;
 
