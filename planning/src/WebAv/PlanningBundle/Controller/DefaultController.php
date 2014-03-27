@@ -4,6 +4,8 @@ namespace WebAv\PlanningBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use WebAv\PlanningBundle\Entity\Reservation;
+use WebAv\PlanningBundle\Entity\Activite;
+use WebAv\PlanningBundle\Form\ActiviteType;
 use WebAv\PlanningBundle\Form\ReservationType;
 use WebAv\UserBundle\Entity\User;
 
@@ -50,8 +52,30 @@ public function indexAction($year)
                       ->getEventByMonth(2,2014,$user);
         return $this->render('WebAvPlanningBundle:Default:accueil.html.twig',array('tab'=>$tab));
     }
+ public function addactAction()
+    {
+      $Activite=new Activite();
+      $form = $this->createForm(new ActiviteType, $Activite);
 
-    public function addactAction()
+      $request = $this->get('request');
+      if ($request->getMethod() == 'POST') {
+        $form->bind($request);
+
+        if ($form->isValid()) {
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($Activite);
+          $em->flush();
+
+          return $this->redirect($this->generateUrl('webav_planning'));
+        }
+      }
+
+      return $this->render('WebAvPlanningBundle:Default:formulaireActivite.html.twig', array(
+        'form' => $form->createView(),
+      ));
+    }
+
+    public function addresAction()
     {
       $Reservation = new Reservation;
       $form = $this->createForm(new ReservationType, $Reservation);

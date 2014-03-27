@@ -6,6 +6,11 @@ webav_planning:
     pattern:  /
     defaults: { _controller: WebAvPlanningBundle:Default:accueil }
 
-webav_planningadd:
-    pattern:  /Ajouter
+webav_planningaddres:
+    pattern:  /Ajouter/reservation
+    defaults: { _controller: WebAvPlanningBundle:Default:addres }
+
+
+webav_planningaddact:
+    pattern:  /Ajouter/activite
     defaults: { _controller: WebAvPlanningBundle:Default:addact }

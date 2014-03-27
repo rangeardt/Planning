@@ -15,7 +15,10 @@ class ActDateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('activite',new ActiviteType())
+           ->add('activite', 'entity', array(
+            'class'    => 'WebAvPlanningBundle:Activite',
+            'property' => 'nomactivite',
+            'multiple' => false))
             ->add('date',new DateType())
         ;
     }
