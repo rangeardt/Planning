@@ -11,10 +11,12 @@ use WebAv\UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
-public function indexAction($year)
+public function indexAction($year = null)
     {
 
-
+      if($year == null ){
+        $year=Date('Y');
+      }
       $ServiceDate = $this->container->get('webav_planning.date');
 
       $dates=$ServiceDate->getAll($year);
@@ -41,17 +43,9 @@ public function indexAction($year)
     }
 
     public function accueilAction(){
-        $userManager = $this->container->get('fos_user.user_manager');
-
-        $user = $userManager->findUserByUsername($this->container->get('security.context')
-                      ->getToken()
-                      ->getUser());
-        $tab = $this->getDoctrine()
-                      ->getManager()
-                      ->getRepository('WebAvPlanningBundle:Reservation')
-                      ->getEventByMonth(2,2014,$user);
-        return $this->render('WebAvPlanningBundle:Default:accueil.html.twig',array('tab'=>$tab));
+      return $this->redirect($this->generateUrl('webav_planningyear'));
     }
+
  public function addactAction()
     {
       $Activite=new Activite();
@@ -66,7 +60,7 @@ public function indexAction($year)
           $em->persist($Activite);
           $em->flush();
 
-          return $this->redirect($this->generateUrl('webav_planning'));
+          return $this->redirect($this->generateUrl('webav_planningyear'));
         }
       }
 
@@ -95,7 +89,7 @@ public function indexAction($year)
           $em->persist($Reservation);
           $em->flush();
 
-          return $this->redirect($this->generateUrl('webav_planning'));
+          return $this->redirect($this->generateUrl('webav_planningyear'));
         }
       }
 

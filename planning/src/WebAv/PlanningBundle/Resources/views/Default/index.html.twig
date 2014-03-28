@@ -38,7 +38,7 @@
 			{% else %}
 				<div class="span1 mabox">
 			{% endif %}
-			<center>{{d}}
+		
 			{%set mois = mois+1%}
 			{% if mois < 10 %}
 				{% if d <10 %}
@@ -65,9 +65,9 @@
 					{% endif%}
 			{% endfor %}
 				
-					<p>nb :{{nb}}</p></center>
+				
    	 <!-- Button to trigger modal -->
-    <a href="#myModal{{date1}}" role="button" class="btn" data-toggle="modal">Afficher</a>
+    <a href="#myModal{{date1}}" role="button" class="btn" data-toggle="modal"><p>Jour {{d}}</p> Event :{{nb}}</a>
 
     <div id="myModal{{date1}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">

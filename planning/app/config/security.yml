@@ -9,4 +9,6 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/Planning/, role: ROLE_USER}
+        - { path: ^/Planning, role: ROLE_USER}
+        - { path: ^/Ajouter, role: ROLE_USER}
+        - {path: ^/compte, role:ROLE_USER}

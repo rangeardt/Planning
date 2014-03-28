@@ -25,11 +25,35 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Le Reseau</a>
+          <a class="brand" href="#">Planning</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="#">Accueil</a></li>
+              <li><a href="{{ path('webav_planningyear') }}">Planning</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ajouter <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ path('webav_planningaddact')}}">Activite</a></li>
+                  <li><a href="{{ path('webav_planningaddres')}}">Reservation</a></li>
+                </ul>
 
+              </li>
+ <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Compte <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li><a href="{{ path('fos_user_profile_show') }} ">{{ app.user.username }}</a></li>
+                    <li> <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+
+{% else %}
+    <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+    
+    <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
+{% endif %}
+                </ul>
+
+              </li>
+
+            
             </ul>
           </div><!--/.nav-collapse -->
         </div>

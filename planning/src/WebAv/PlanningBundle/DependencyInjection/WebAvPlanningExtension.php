@@ -19,6 +19,11 @@ class WebAvPlanningExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+
+        $container->setParameter(
+            'current_year',
+            date("Y")
+        );    
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
